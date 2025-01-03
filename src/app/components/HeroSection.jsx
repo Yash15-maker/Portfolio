@@ -5,14 +5,14 @@ import { TypeAnimation } from "react-type-animation";
 import { IoClose } from "react-icons/io5";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Document, Page, pdfjs } from "react-pdf";
+// import { Document, Page, pdfjs } from "react-pdf";
 import { IoEyeOutline } from "react-icons/io5";
 import { SiGoogledrive } from "react-icons/si";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
+// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+//   "/node_modules/pdfjs-dist/build/pdf.worker.min.js",
+//   import.meta.url
+// ).toString();
 
 const HeroSection = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -114,78 +114,37 @@ const ResumeModal = ({ open, handleClose }) => {
       }`}
     >
       <div className="bg-white rounded-lg relative shadow-lg p-6 z-50 md:w-[50%] w-full max-h-[90vh] overflow-auto mx-4 border border-gray-300">
-        {!showPdf ? (
-          <>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
-              <button
-                className="group relative flex items-center justify-center px-8 py-3 text-lg font-semibold text-black transition-all duration-300 ease-in-out rounded-lg hover:bg-primary-500 hover:text-white overflow-hidden shadow-md"
-                onClick={() => setShowPdf(true)}
-              >
-                <span className="absolute inset-0 w-0 bg-primary-500 transition-all duration-300 ease-out group-hover:w-full"></span>
-                <span className="relative flex items-center gap-2">
-                  <IoEyeOutline size={20} />
-                  View Resume
-                </span>
-              </button>
+        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
+          {/**<button
+            className="group relative flex items-center justify-center px-8 py-3 text-lg font-semibold text-black transition-all duration-300 ease-in-out rounded-lg hover:bg-primary-500 hover:text-white overflow-hidden shadow-md"
+            onClick={() => setShowPdf(true)}
+          >
+            <span className="absolute inset-0 w-0 bg-primary-500 transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span className="relative flex items-center gap-2">
+              <IoEyeOutline size={20} />
+              View Resume
+            </span>
+          </button>**/}
 
-              <button
-                className="group relative flex items-center justify-center px-8 py-3 text-lg font-semibold text-black transition-all duration-300 ease-in-out rounded-lg hover:bg-primary-500 hover:text-white overflow-hidden shadow-md"
-                onClick={() => window.open(driveUrl, "_blank")}
-              >
-                <span className="absolute inset-0 w-0 bg-primary-500 transition-all duration-300 ease-out group-hover:w-full"></span>
-                <span className="relative flex items-center gap-2">
-                  <SiGoogledrive size={20} />
-                  Through Drive
-                </span>
-              </button>
-            </div>
-            <div className="text-center">
-              <Link href="Yash_Mishra.pdf" target="_blank" download>
-                <button className="py-2 px-2 md:px-6 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg">
-                  Download Resume
-                </button>
-              </Link>
-            </div>
-          </>
-        ) : (
-          <div className="flex flex-col items-center">
-            <Document
-              file="Yash_Mishra.pdf"
-              onLoadSuccess={onDocumentLoadSuccess}
-            >
-              <Page
-                pageNumber={pageNumber}
-                renderTextLayer={false}
-                renderAnnotationLayer={false}
-              />
-            </Document>
-            <div className="flex gap-4 items-center mt-4">
-              <button
-                disabled={pageNumber <= 1}
-                onClick={() => setPageNumber((prev) => prev - 1)}
-                className="px-4 py-2 bg-primary-500 text-white rounded disabled:opacity-50"
-              >
-                Previous
-              </button>
-              <p>
-                Page {pageNumber} of {numPages}
-              </p>
-              <button
-                disabled={pageNumber >= numPages}
-                onClick={() => setPageNumber((prev) => prev + 1)}
-                className="px-4 py-2 bg-primary-500 text-white rounded disabled:opacity-50"
-              >
-                Next
-              </button>
-            </div>
-            <button
-              onClick={() => setShowPdf(false)}
-              className="mt-4 text-primary-500 hover:underline"
-            >
-              Back to options
+          <button
+            className="group relative flex items-center justify-center px-8 py-3 text-lg font-semibold text-black transition-all duration-300 ease-in-out rounded-lg hover:bg-primary-500 hover:text-white overflow-hidden shadow-md"
+            onClick={() => window.open(driveUrl, "_blank")}
+          >
+            <span className="absolute inset-0 w-0 bg-primary-500 transition-all duration-300 ease-out group-hover:w-full"></span>
+            <span className="relative flex items-center gap-2">
+              <SiGoogledrive size={20} />
+              Through Drive
+            </span>
+          </button>
+        </div>
+        <div className="text-center">
+          <Link href="Yash_Mishra.pdf" target="_blank" download>
+            <button className="py-2 px-2 md:px-6 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg">
+              Download Resume
             </button>
-          </div>
-        )}
+          </Link>
+        </div>
+
         <button
           onClick={showPdf ? handlePdfClosed : handleClose}
           className="absolute top-0 right-0 text-red-500 hover:text-gray-700"
@@ -200,3 +159,76 @@ const ResumeModal = ({ open, handleClose }) => {
     </div>
   );
 };
+
+// {!showPdf ? (
+//   <>
+//     <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
+//       <button
+//         className="group relative flex items-center justify-center px-8 py-3 text-lg font-semibold text-black transition-all duration-300 ease-in-out rounded-lg hover:bg-primary-500 hover:text-white overflow-hidden shadow-md"
+//         onClick={() => setShowPdf(true)}
+//       >
+//         <span className="absolute inset-0 w-0 bg-primary-500 transition-all duration-300 ease-out group-hover:w-full"></span>
+//         <span className="relative flex items-center gap-2">
+//           <IoEyeOutline size={20} />
+//           View Resume
+//         </span>
+//       </button>
+
+//       <button
+//         className="group relative flex items-center justify-center px-8 py-3 text-lg font-semibold text-black transition-all duration-300 ease-in-out rounded-lg hover:bg-primary-500 hover:text-white overflow-hidden shadow-md"
+//         onClick={() => window.open(driveUrl, "_blank")}
+//       >
+//         <span className="absolute inset-0 w-0 bg-primary-500 transition-all duration-300 ease-out group-hover:w-full"></span>
+//         <span className="relative flex items-center gap-2">
+//           <SiGoogledrive size={20} />
+//           Through Drive
+//         </span>
+//       </button>
+//     </div>
+//     <div className="text-center">
+//       <Link href="Yash_Mishra.pdf" target="_blank" download>
+//         <button className="py-2 px-2 md:px-6 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg">
+//           Download Resume
+//         </button>
+//       </Link>
+//     </div>
+//   </>
+// ) : (
+//   <div className="flex flex-col items-center text-black">
+//     <Document
+//       file="Yash_Mishra.pdf"
+//       onLoadSuccess={onDocumentLoadSuccess}
+//     >
+//       <Page
+//         pageNumber={pageNumber}
+//         renderTextLayer={false}
+//         renderAnnotationLayer={false}
+//       />
+//     </Document>
+//     <div className="flex gap-4 items-center mt-4">
+//       <button
+//         disabled={pageNumber <= 1}
+//         onClick={() => setPageNumber((prev) => prev - 1)}
+//         className="px-4 py-2 bg-primary-500 text-white rounded disabled:opacity-50"
+//       >
+//         Previous
+//       </button>
+//       <p>
+//         Page {pageNumber} of {numPages}
+//       </p>
+//       <button
+//         disabled={pageNumber >= numPages}
+//         onClick={() => setPageNumber((prev) => prev + 1)}
+//         className="px-4 py-2 bg-primary-500 text-white rounded disabled:opacity-50"
+//       >
+//         Next
+//       </button>
+//     </div>
+//     <button
+//       onClick={() => setShowPdf(false)}
+//       className="mt-4 text-primary-500 hover:underline"
+//     >
+//       Back to options
+//     </button>
+//   </div>
+// )}
